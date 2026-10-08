@@ -31,11 +31,11 @@ jobs:
         job:
           - { features: unix }
     steps:
-    - uses: actions/checkout@v7.0.1
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         persist-credentials: false
     - name: Prepare, build and test
-      uses: vmactions/openbsd-vm@v1
+      uses: vmactions/openbsd-vm@5f7b2c933b8846a138361d6843c52af4bef5d945 # v1.4.8
       with:
         usesh: true
         sync: rsync
@@ -131,7 +131,7 @@ jobs:
         job:
           - { features: unix }
     steps:
-    - uses: actions/checkout@v7.0.1
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         persist-credentials: false
     - name: Avoid no space left on device # shared with guest?
@@ -142,7 +142,7 @@ jobs:
         sudo rsync -a --delete /tmp/empty/ /usr/share/dotnet/
         sudo rsync -a --delete /tmp/empty/ /usr/local/lib/android/
     - name: Prepare, build and test
-      uses: vmactions/openbsd-vm@v1
+      uses: vmactions/openbsd-vm@5f7b2c933b8846a138361d6843c52af4bef5d945 # v1.4.8
       with:
         usesh: true
         sync: rsync

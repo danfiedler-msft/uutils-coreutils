@@ -25,7 +25,7 @@ jobs:
     name: Build and test uufuzz examples
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v7.0.1
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         persist-credentials: false
     - name: Build uufuzz library
@@ -54,11 +54,11 @@ jobs:
     name: Build the fuzzers
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v7.0.1
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         persist-credentials: false
     - name: Install `cargo-fuzz`
-      uses: taiki-e/install-action@v2
+      uses: taiki-e/install-action@f7e5d7c961414b23f5b25b2da9294395d08513ad # v2.87.26
       with:
         tool: cargo-fuzz
     - name: Emulate a nightly toolchain
@@ -108,11 +108,11 @@ jobs:
               fuzz_dirname:true
 
     steps:
-    - uses: actions/checkout@v7.0.1
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         persist-credentials: false
     - name: Install `cargo-fuzz`
-      uses: taiki-e/install-action@v2
+      uses: taiki-e/install-action@f7e5d7c961414b23f5b25b2da9294395d08513ad # v2.87.26
       with:
         tool: cargo-fuzz
     - name: Emulate a nightly toolchain
@@ -192,7 +192,7 @@ jobs:
         exit "$REQUIRED_TARGET_FAILED"
     - name: Upload Stats
       if: always()
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: fuzz-stats-${{ matrix.group.name }}
         path: |
@@ -205,11 +205,11 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps:
-      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Download all stats
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           path: fuzz/stats-artifacts
           pattern: fuzz-stats-*
@@ -303,7 +303,7 @@ jobs:
         run: |
           cat fuzzing_summary.md
       - name: Upload Summary
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: fuzzing-summary
           path: fuzzing_summary.md

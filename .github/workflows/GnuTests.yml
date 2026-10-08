@@ -40,11 +40,11 @@ jobs:
     steps:
     #### Get the code
     - name: Checkout code (uutils)
-      uses: actions/checkout@v7.0.1
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         path: 'uutils'
         persist-credentials: false
-    - uses: Swatinem/rust-cache@v2
+    - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
       with:
         workspaces: "./uutils -> target"
     - name: Checkout code (GNU coreutils)
@@ -149,17 +149,17 @@ jobs:
 
     ### Upload artifacts
     - name: Upload full json results
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: gnu-full-result
         path: ${{ env.TEST_FULL_SUMMARY_FILE }}
     - name: Upload root json results
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: gnu-root-full-result
         path: ${{ env.TEST_ROOT_FULL_SUMMARY_FILE }}
     - name: Upload stty json results
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: gnu-stty-full-result
         path: ${{ env.TEST_STTY_FULL_SUMMARY_FILE }}
@@ -170,7 +170,7 @@ jobs:
         # Compress logs before upload (fails otherwise)
         gzip gnu/tests/*/*.log
     - name: Upload test logs
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: test-logs
         path: |
@@ -183,7 +183,7 @@ jobs:
     steps:
     #### Get the code
     - name: Checkout code (uutils)
-      uses: actions/checkout@v7.0.1
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         path: 'uutils'
         persist-credentials: false
@@ -192,10 +192,10 @@ jobs:
 
     #### Lima build environment setup
     - name: Setup Lima
-      uses: lima-vm/lima-actions/setup@v1
+      uses: lima-vm/lima-actions/setup@55627e31b78637bf254a8b2a14da8ea7d12564e5 # v1.1.0
       id: lima-actions-setup
     - name: Cache ~/.cache/lima
-      uses: actions/cache@v6
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: ~/.cache/lima
         key: lima-${{ steps.lima-actions-setup.outputs.version }}
@@ -267,12 +267,12 @@ jobs:
         # Copy the test directory now
         rsync -v -a -e ssh lima-default:~/work/gnu/tests/ ./gnu/tests-selinux/
     - name: Upload SELinux json results
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: selinux-gnu-full-result
         path: ${{ env.TEST_SELINUX_FULL_SUMMARY_FILE }}
     - name: Upload SELinux root json results
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: selinux-root-gnu-full-result
         path: ${{ env.TEST_SELINUX_ROOT_FULL_SUMMARY_FILE }}
@@ -282,7 +282,7 @@ jobs:
         # Compress logs before upload (fails otherwise)
         gzip gnu/tests-selinux/*/*.log
     - name: Upload SELinux test logs
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: selinux-test-logs
         path: |
@@ -294,11 +294,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
     - name: Checkout code (uutils)
-      uses: actions/checkout@v7.0.1
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         path: 'uutils'
         persist-credentials: false
-    - uses: Swatinem/rust-cache@v2
+    - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
       with:
         workspaces: "./uutils -> target"
     - name: Checkout code (GNU coreutils)
@@ -315,14 +315,14 @@ jobs:
       run: |
         python3 uutils/util/gnu-json-result.py gnu/tests-qemu > ${{ env.TEST_QEMU_FULL_SUMMARY_FILE }}
     - name: Upload SMACK/ROOTFS json results
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: qemu-gnu-full-result
         path: ${{ env.TEST_QEMU_FULL_SUMMARY_FILE }}
     - name: Compress SMACK/ROOTFS test logs
       run: gzip gnu/tests-qemu/*/*.log 2>/dev/null || true
     - name: Upload SMACK/ROOTFS test logs
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: qemu-test-logs
         path: |
@@ -350,7 +350,7 @@ jobs:
 
         outputs TEST_SUMMARY_FILE AGGREGATED_SUMMARY_FILE
     - name: Checkout code (uutils)
-      uses: actions/checkout@v7.0.1
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         path: 'uutils'
         persist-credentials: false
@@ -394,7 +394,7 @@ jobs:
         fi
         echo "RUN_ID=${RUN_ID}" >> $GITHUB_OUTPUT
     - name: Retrieve reference artifacts
-      uses: dawidd6/action-download-artifact@v24
+      uses: dawidd6/action-download-artifact@d63b86af1b34672e53c440b1b83979861906bad7 # v24
       # ref: <https://github.com/dawidd6/action-download-artifact>
       continue-on-error: true ## don't break the build for missing reference artifacts (may be expired or just not generated yet)
       with:
@@ -406,38 +406,38 @@ jobs:
         workflow_conclusion: completed ## continually recalibrates to last commit of default branch with a successful GnuTests (ie, "self-heals" from GnuTest regressions, but needs more supervision for/of regressions)
         path: "reference"
     - name: Download full json results
-      uses: actions/download-artifact@v8
+      uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
       with:
         name: gnu-full-result
         path: results
         merge-multiple: true
     - name: Download root json results
-      uses: actions/download-artifact@v8
+      uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
       with:
         name: gnu-root-full-result
         path: results
         merge-multiple: true
     - name: Download stty json results
-      uses: actions/download-artifact@v8
+      uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
       with:
         name: gnu-stty-full-result
         path: results
         merge-multiple: true
 
     - name: Download selinux json results
-      uses: actions/download-artifact@v8
+      uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
       with:
         name: selinux-gnu-full-result
         path: results
         merge-multiple: true
     - name: Download selinux root json results
-      uses: actions/download-artifact@v8
+      uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
       with:
         name: selinux-root-gnu-full-result
         path: results
         merge-multiple: true
     - name: Download SMACK/ROOTFS json results
-      uses: actions/download-artifact@v8
+      uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
       with:
         name: qemu-gnu-full-result
         path: results
@@ -486,17 +486,17 @@ jobs:
         HASH=$(sha1sum '${{ steps.vars.outputs.TEST_SUMMARY_FILE }}' | cut --delim=" " -f 1)
         outputs HASH
     - name: Upload SHA1/ID of 'test-summary'
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: "${{ steps.summary.outputs.HASH }}"
         path: "${{ steps.vars.outputs.TEST_SUMMARY_FILE }}"
     - name: Upload test results summary
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: test-summary
         path: "${{ steps.vars.outputs.TEST_SUMMARY_FILE }}"
     - name: Upload aggregated json results
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: aggregated-result
         path: ${{ steps.vars.outputs.AGGREGATED_SUMMARY_FILE }}
@@ -548,7 +548,7 @@ jobs:
         fi
     - name: Upload comparison log (for GnuComment workflow)
       if: success() || failure() # run regardless of prior step success/failure
-      uses: actions/upload-artifact@v7
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: comment
         path: reference/comment/
